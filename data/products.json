@@ -1,1 +1,23 @@
-[{"id":"2020","title":"The Book of Life","imageUrl":"https://kbimages1-a.akamaihd.net/b07fd048-853c-42fe-8b1d-a04a3d1de3a7/353/569/90/False/the-book-of-life-25.jpg","description":"Look for the hit TV series “A Discovery of Witches”. Love of another can free him from his family’s curse, but it’s hard finding the perfect woman.","price":"2499.99"},{"title":"Huntress","imageUrl":"https://i.pinimg.com/564x/ca/dc/f6/cadcf682fd018249d120dde0d0ef028a.jpg","description":"Like the other men in Prince Kelvin’s line, only the love of another can free him from his family’s curse, but it’s hard finding the perfect woman.","price":"3333.33","id":"0.47061850105824155"},{"id":"0.42329223591397924","title":"Significance","imageUrl":"https://images-eu.ssl-images-amazon.com/images/I/515fPMSPesL._SY445_QL70_ML2_.jpg","description":"Like the other men in Prince Kelvin’s line, only the love of another can free him from his family’s curse, but it’s hard finding the perfect woman","price":"4599.99"}]
+[
+  {
+    "id": "2020",
+    "title": "The Book of Life",
+    "imageUrl": "https://kbimages1-a.akamaihd.net/b07fd048-853c-42fe-8b1d-a04a3d1de3a7/353/569/90/False/the-book-of-life-25.jpg",
+    "description": "Look for the hit TV series “A Discovery of Witches”. Love of another can free him from his family’s curse, but it’s hard finding the perfect woman.",
+    "price": "2499.99"
+  },
+  {
+    "title": "Huntress",
+    "imageUrl": "https://i.pinimg.com/564x/ca/dc/f6/cadcf682fd018249d120dde0d0ef028a.jpg",
+    "description": "Like the other men in Prince Kelvin’s line, only the love of another can free him from his family’s curse, but it’s hard finding the perfect woman.",
+    "price": "3333.33",
+    "id": "0.47061850105824155"
+  },
+  {
+    "id": "0.42329223591397924",
+    "title": "Significance",
+    "imageUrl": "https://images-eu.ssl-images-amazon.com/images/I/515fPMSPesL._SY445_QL70_ML2_.jpg",
+    "description": "Like the other men in Prince Kelvin’s line, only the love of another can free him from his family’s curse, but it’s hard finding the perfect woman",
+    "price": "4599.99"
+  }
+]
