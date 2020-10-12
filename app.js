@@ -1,8 +1,8 @@
 const path = require("path");
 
-const mongoConnect = require('./util/database').mongoConnect;
+const mongoose = require("mongoose");
 
-const User = require('./models/user');
+const User = require("./models/user");
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -19,11 +19,10 @@ app.set("views", "views");
 app.use(bodyParser.urlencoded({ extended: false })); // to parse input data
 app.use(express.static(path.join(__dirname, "public"))); // for css style
 
-
 app.use((req, res, next) => {
-  User.findById("5f8192bfe69994f3533d0d28")
+  User.findById("5f840d0b48201b4ed03a65e1")
     .then((user) => {
-      req.user = new User(user.name, user.email, user.cart, user._id);
+      req.user = user;
       next();
     })
     .catch((err) => {
@@ -36,7 +35,25 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-mongoConnect(() => {
-  app.listen(3000);
-})
+mongoose
+  .connect(
+    "mongodb+srv://lakshmikanth:MongoDB0910@cluster0.puarb.mongodb.net/shop?retryWrites=true&w=majority",
+    { useNewUrlParser: true }
+  )
+  .then((result) => {
+    User.findOne().then((user) => {
+      if (!user) {
+        const user = new User({
+          name: "kanth",
+          email: "kanth@gmail.com",
+          cart: {
+            items: [],
+          },
+        });
+        user.save();
+      }
+    });
 
+    app.listen(3000);
+  })
+  .catch((err) => console.log(err));
