@@ -270,6 +270,22 @@ form {
   box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
 }
 
+.user-message {
+  margin: auto;
+  width: 90%;
+  border: 1px solid #4771fa;
+  background: #b9c9ff;
+  padding: 0.5rem;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.user-message__error{
+  border-color: red;
+  background: #ffb0b0;
+  color: red;
+}
+
 @media (min-width: 768px) {
   .main-header__nav {
     display: flex;
@@ -278,6 +294,11 @@ form {
   #side-menu-toggle {
     display: none;
   }
+
+  .user-message {
+    width: 30rem;
+  }
+  
 }
 
 
