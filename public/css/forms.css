@@ -28,3 +28,17 @@
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0, 107, 95, 0.251)
 }
+
+.form-control input.invalid,
+.form-control textarea.invalid
+{
+    border-color: red;
+}
+
+.form-control input:focus.invalid,
+.form-control textarea:focus.invalid
+{
+    border-color: red;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.251)
+}
