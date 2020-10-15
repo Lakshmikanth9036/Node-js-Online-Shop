@@ -1,4 +1,5 @@
 .form-control {
+    position: relative;
     margin: 1rem 0;
 }
 
@@ -42,3 +43,4 @@
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.251)
 }
+
