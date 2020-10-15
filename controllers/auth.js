@@ -25,10 +25,10 @@ exports.getLogin = (req, res, next) => {
     pageTitle: "Login",
     errorMessage: message,
     oldInput: {
-      email: '',
-      password: ''
+      email: "",
+      password: "",
     },
-    validationErrors: []
+    validationErrors: [],
   });
 };
 
@@ -44,9 +44,9 @@ exports.postLogin = (req, res, next) => {
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email: email,
-        password: password
+        password: password,
       },
-      validationErrors: errors.array()
+      validationErrors: errors.array(),
     });
   }
 
@@ -56,12 +56,12 @@ exports.postLogin = (req, res, next) => {
         return res.status(422).render("auth/login", {
           path: "/login",
           pageTitle: "Login",
-          errorMessage: 'Invalid email or Password',
+          errorMessage: "Invalid email or Password",
           oldInput: {
             email: email,
-            password: password
+            password: password,
           },
-          validationErrors: []
+          validationErrors: [],
         });
       }
       bcrypt
@@ -78,12 +78,12 @@ exports.postLogin = (req, res, next) => {
           return res.status(422).render("auth/login", {
             path: "/login",
             pageTitle: "Login",
-            errorMessage: 'Invalid email or Password',
+            errorMessage: "Invalid email or Password",
             oldInput: {
               email: email,
-              password: password
+              password: password,
             },
-            validationErrors: []
+            validationErrors: [],
           });
         })
         .catch((err) => {
@@ -91,7 +91,11 @@ exports.postLogin = (req, res, next) => {
           res.redirect("/login");
         });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.getSignup = (req, res, next) => {
@@ -107,11 +111,11 @@ exports.getSignup = (req, res, next) => {
     pageTitle: "Signup",
     errorMessage: message,
     oldInput: {
-      email: '',
-      password: '',
-      confirmPassword: ''
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
-    validationErrors: []
+    validationErrors: [],
   });
 };
 
@@ -128,9 +132,9 @@ exports.postSignup = (req, res, next) => {
       oldInput: {
         email: email,
         password: password,
-        confirmPassword: req.body.confirmPassword
+        confirmPassword: req.body.confirmPassword,
       },
-      validationErrors: errors.array()
+      validationErrors: errors.array(),
     });
   }
   bcrypt
@@ -152,7 +156,11 @@ exports.postSignup = (req, res, next) => {
           subject: "Signup succeeded",
           html: "<h1>You successfully signed up!</h1>",
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
+        });
     });
 };
 
@@ -207,7 +215,11 @@ exports.postReset = (req, res, next) => {
               `,
         });
       })
-      .catch((errr) => console.log(err));
+      .catch((errr) => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        return next(error);
+      });
   });
 };
 
@@ -231,7 +243,11 @@ exports.getNewPassword = (req, res, next) => {
         passwordToken: token,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postNewPassword = (req, res, next) => {
@@ -258,5 +274,9 @@ exports.postNewPassword = (req, res, next) => {
     .then((result) => {
       res.redirect("/login");
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
