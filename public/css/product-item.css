@@ -157,4 +157,8 @@ img {
     margin-left: auto;
     margin-right: auto;
   }
+
+  .card{
+    max-width: 280px;
+  }
 }

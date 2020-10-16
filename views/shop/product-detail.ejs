@@ -60,14 +60,12 @@
                     </div>
     
                     <!-- ===== PRECI ===== -->
-                    <% if (isAuthenticated) {%>
                     <form class="preci" action="/cart" method="POST">
                         <span class="preci__title">&#8377; <%= product.price %></span>
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <button type="submit" class="preci__button">Add to Cart</button>
                         <input type="hidden" name="productId" value="<%= product._id %>">
                     </form>
-                    <% } %>
                 </div>
             </div>
             <!--  -->

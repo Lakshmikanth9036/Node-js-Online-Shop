@@ -27,7 +27,17 @@
                     </form>
                 </div>
             <% } else { %>
-                <h1>No Products in Cart!</h1>
+               <div class="main-empty__cart">
+                    <div class="empty__cart">
+                        <div class="empty__cart-title">My Cart</div>
+                        <div class="empty__cart-body">
+                            <img class="empty__cart-img" src="../../images/bg/no-cart-item.png" alt="">
+                            <div class="empty__cart-text">Your cart is empty</div>
+                            <div class="empty__cart-add-item-text">Add items to it now</div>
+                            <a href="/" class="empty__cart-shop-now-btn">Shop Now</a>
+                        </div>
+                    </div>
+               </div>
             <% } %>
         </main>
         <%- include('../includes/end.ejs') %>

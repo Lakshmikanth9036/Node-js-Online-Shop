@@ -195,6 +195,11 @@ p {
         margin: 0;
     }
 
+    main {
+      padding: 1rem 0;
+      
+    }
+
   :root {
     --biggest-font-size: 4.25rem;
     --big-font-size: 3.25rem;

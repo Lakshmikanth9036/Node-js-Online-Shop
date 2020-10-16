@@ -266,6 +266,26 @@ form {
   color: red;
 }
 
+.pagination{
+  /* margin: 2rem 0; */
+  text-align: center;
+}
+
+.pagination a{
+  padding:  0.6rem 1rem;
+  color: #111111;
+  border: 1px solid #111111;
+  border-radius: 3px;
+  margin: 0 0.5rem;
+}
+
+.pagination a:hover,
+.pagination a:active,
+.pagination a.active{
+  background-color: #111111;
+  color: #fff;
+}
+
 @media screen and (min-width: 968px) {
 
   .bd-grid {

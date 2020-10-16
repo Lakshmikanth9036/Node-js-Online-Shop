@@ -6,7 +6,13 @@
         <%- include('../includes/navigation.ejs') %>
         <main>
             <% if (orders.length <= 0) { %>
-                <h1>Nothing there!</h1>
+                <div class="main-empty__order">
+                    <div class="empty__order">
+                        <img class="empty__order-img" src="../../images/bg/emptyOrder.png" alt="">
+                        <div class="empty__order-text">You have no orders</div>
+                        <a href="/" class="empty__order-shop-now-btn">Start Shopping</a>
+                    </div>
+               </div>
             <% } else { %>
                 <ul class="orders">
                     <% orders.forEach(order => { %>
