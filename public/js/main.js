@@ -1,16 +1,20 @@
-const backdrop = document.querySelector('.backdrop');
-const sideDrawer = document.querySelector('.mobile-nav');
-const menuToggle = document.querySelector('#side-menu-toggle');
+const backdrop = document.querySelector(".backdrop");
+const sideDrawer = document.querySelector(".nav__menu");
+const menuToggle = document.querySelector("#nav-toggle");
 
 function backdropClickHandler() {
-  backdrop.style.display = 'none';
-  sideDrawer.classList.remove('open');
+  backdrop.style.display = "none";
+  sideDrawer.classList.remove("open");
 }
 
 function menuToggleClickHandler() {
-  backdrop.style.display = 'block';
-  sideDrawer.classList.add('open');
+  sideDrawer.classList.toggle("open");
+  if ((backdrop.style.display === "none" || backdrop.style.display === "")) {
+    backdrop.style.display = "block";
+  } else {
+    backdrop.style.display = "none";
+  }
 }
 
-backdrop.addEventListener('click', backdropClickHandler);
-menuToggle.addEventListener('click', menuToggleClickHandler);
+backdrop.addEventListener("click", backdropClickHandler);
+menuToggle.addEventListener("click", menuToggleClickHandler);

@@ -25,9 +25,9 @@
     /* outline-color: #00695c;
     box-shadow: 0 0 6px rgb(0, 107, 95); */
     background-color: #fff;
-    border-color: #00695c;
+    border-color: #111111;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0, 107, 95, 0.251)
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.251)
 }
 
 .form-control input.invalid,

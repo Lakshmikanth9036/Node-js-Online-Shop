@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/product-item.css">
 </head>
 
 <body>
@@ -7,26 +7,35 @@
 
     <main>
         <% if (prods.length > 0) { %>
-            <div class="grid">
+            <div class="main prod-grid">
                 <% for (let product of prods) { %>
-                    <article class="card product-item">
-                        <header class="card__header">
-                            <h1 class="product__title"><%= product.title %></h1>
-                        </header>
-                        <div class="card__image">
+                    <article class="card">
+                        <div class="card__img">
                             <img src="/<%= product.imageUrl %>"
                                 alt="<%= product.title %>">
                         </div>
-                        <div class="card__content">
-                            <h2 class="product__price">&#8377; <%= product.price %></h2>
-                            <p class="product__description"><%= product.description %></p>
+                        <div class="card__name">
+                            <p><%= product.title %></p>
                         </div>
-                        <div class="card__actions">
+                        <div class="card__precis">
+                            <a href="/products/<%= product._id %>" class="card__icon" ><img src="../../images/logo/alert-circle-outline.svg" alt="<%= product.title %>"></ion-icon></a>
+                            <div>
+                                <span class="card__preci card__preci--before">&#8377; <%= product.price %></span>
+                                <span class="card__preci card__preci--now">&#8377; <%= product.price %></span>
+                            </div>
+                            <form action="/cart" method="POST">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input class="card__icon" type="image" src="../../images/logo/cart-outline.svg" alt="<%= product.title %>" >
+                                <input type="hidden" name="productId" value="<%= product._id %>">
+                            </form>
+                            <!-- <a href="" class="card__icon"><img src="../../images/logo/cart-outline.svg" alt="<%= product.title %>"></a> -->
+                        </div>
+                        <!-- <div class="card__actions">
                             <a href="/products/<%= product._id %>" class="btn">Details</a>
                             <% if (isAuthenticated) {%>
                                 <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                                 <% } %>
-                        </div>
+                        </div> -->
                     </article>
                 <% } %>
             </div>

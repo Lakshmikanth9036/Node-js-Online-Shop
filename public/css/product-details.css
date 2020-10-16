@@ -1,0 +1,268 @@
+:root {
+  --first-color: #665f5f57;
+  --primary: #665f5f57;
+  --second-color: #33303d;
+  --black-color: #111111;
+  --white-color: #fff;
+}
+
+:root {
+  --biggest-font-size: 1.5rem;
+  --big-font-size: 1.5rem;
+  --normal-font-size: 0.938rem;
+  --smaller-font-size: 0.75rem;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.home {
+  height: calc(100vh - 3rem);
+  display: grid;
+  grid-template-rows: 1fr 1.5fr;
+  grid-template-areas: "sneaker";
+  overflow-x: hidden;
+  margin-top: 2rem;
+}
+
+.sneaker {
+  grid-area: sneaker;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.sneaker__figure {
+  width: 240px;
+  height: 240px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  box-shadow: 4px 4px 12px rgba(7, 7, 7, 0.25);
+}
+
+.sneaker__img {
+  width: 290px;
+  position: absolute;
+  top: 16%;
+  left: 9%;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  transform: rotate(30deg);
+  opacity: 0;
+  filter: drop-shadow(0 10px 10px rgba(17, 17, 17, 0.4));
+}
+
+.sneaker__img.shows {
+  opacity: 1;
+}
+
+.sneaker__colors {
+  position: absolute;
+  right: 2%;
+}
+
+.sneaker__color {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.sneaker__color.active__bg {
+  border: 2px solid #fff;
+  box-shadow: 0 0 2px black;
+}
+
+.sneaker__colors-one {
+  background-color: var(--first-color);
+}
+
+.sneaker__colors-two {
+  background-color: var(--black-color);
+}
+
+/*===== Data =====*/
+.data {
+  margin-bottom: 1.5rem;
+}
+
+.data__subtitle {
+  font-size: var(--normal-font-size);
+  font-weight: 500;
+}
+
+.data__title {
+  font-size: var(--biggest-font-size);
+  margin-bottom: 0.5rem;
+}
+
+.data__description {
+  font-size: var(--normal-font-size);
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8rem;
+}
+
+/*===== Size =====*/
+.size__title {
+  font-size: var(--normal-font-size);
+  margin-bottom: 1rem;
+}
+
+.size__content {
+  display: flex;
+}
+
+.size__tallas {
+  width: 30px;
+  height: 30px;
+  margin-right: 0.5rem;
+  font-size: var(--smaller-font-size);
+  text-align: center;
+  line-height: 30px;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+.size__tallas.active {
+  background-color: var(--black-color);
+  color: var(--white-color);
+}
+
+/*===== Cant =====*/
+.cant__title {
+  font-size: var(--normal-font-size);
+  margin-bottom: 1rem;
+}
+
+.cant__content {
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--black-color);
+  color: var(--white-color);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/*===== Preci =====*/
+.preci {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 83px;
+  background-color: var(--white-color);
+  border-radius: 1.5rem 1.5rem 0 0;
+  box-shadow: 0px 0px 20px rgba(17, 17, 17, 0.25);
+  display: flex;
+  justify-content: space-evenly;
+  font: inherit;
+  align-items: center;
+}
+
+.preci__title {
+  font-size: var(--big-font-size);
+  color: var(--black-color);
+}
+
+.preci__button {
+  background-color: var(--black-color);
+  border: none;
+  font: inherit;
+  outline: 0;
+  color: var(--white-color);
+  padding: 1.25rem 3.125rem;
+  border-radius: 0.5rem;
+}
+
+@media screen and (min-width: 968px) {
+
+    body{
+        margin: 0;
+    }
+
+  :root {
+    --biggest-font-size: 4.25rem;
+    --big-font-size: 3.25rem;
+    --normal-font-size: 1.25rem;
+    --smaller-font-size: 0.813rem;
+  }
+
+  .home {
+    height: 100vh;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: max-content;
+    align-content: center;
+    justify-content: center;
+    column-gap: 6rem;
+  }
+  .sneaker__figure {
+    width: 500px;
+    height: 500px;
+  }
+  .sneaker__img {
+    width: 650px;
+    top: 13%;
+    left: 3%;
+  }
+  .sneaker__colors {
+    right: initial;
+    bottom: 0;
+  }
+  .sneaker__colors span {
+    display: inline-block;
+  }
+
+  .info {
+    align-self: center;
+    margin-right: 2%;
+  }
+  .data {
+    margin-bottom: 2.5rem;
+  }
+  .data__subtitle {
+    font-size: 1.5rem;
+  }
+  .data__title {
+    margin-bottom: 1rem;
+  }
+  .size {
+    margin-bottom: 2.5rem;
+  }
+  .size__tallas {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 15px;
+  }
+
+  .cant__content {
+    width: 150px;
+    height: 45px;
+  }
+
+  .preci {
+    position: initial;
+    background-color: initial;
+    justify-content: space-between;
+    box-shadow: none;
+  }
+  .preci__title {
+    color: var(--black-color);
+    font-weight: 500;
+  }
+}
