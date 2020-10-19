@@ -3,7 +3,6 @@ const path = require("path");
 
 const stripe = require("stripe")(
   process.env.STRIPE_KEY
-  // 'sk_test_51HctgmHbXMq71oh3rPuhP9VCSIAnHOyEAEaTVBTJgC6QZh5nUAlyXvO8fJOwBm8AWHAL2JN6xcUAlcGDw3syNk8b007Q75F3Zj'
 );
 
 const PDFDocument = require("pdfkit");
@@ -192,9 +191,10 @@ exports.getCeckout = (req, res, next) => {
       });
     })
     .catch((err) => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+      console.log(err)
+      // const error = new Error(err);
+      // error.httpStatusCode = 500;
+      // return next(error);
     });
 };
 

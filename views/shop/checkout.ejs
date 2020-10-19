@@ -50,6 +50,7 @@
                             var stripe = Stripe('pk_test_51HctgmHbXMq71oh3woM6jnWDf2YPAOw85mZ2O0VaZQBmZBoLt6GNlqzfDt05TS4gHy7L1sZIJZ03xVVGssbA6JZv00BQ4ZlEsz');
                             var orderBtn = document.getElementById('order-btn');
                             orderBtn.addEventListener('click', function(){
+                                console.log(orderBtn)
                                 stripe.redirectToCheckout({
                                     sessionId: '<%= sessionId %>'
                                 })
