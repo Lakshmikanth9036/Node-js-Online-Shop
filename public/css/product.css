@@ -62,6 +62,7 @@ main{
     width: max-content;
     border: none;
     padding: 0.875rem 2rem;
+    margin-right: 5px;
     background-color: #F2A20C;
     color: #E9EAEC;
     border-radius: .5rem;
@@ -92,17 +93,12 @@ main{
   }
   
   .card:hover .card__title {
-    /* transform: translateX(-1.3rem); */
     text-align: left;
     margin-bottom: 0;
   }
   
   .card:hover .card__preci {
     transform: translateX(-5.8rem);
-  }
-
-  .card:hover .card__actions {
-    transform: translateX(-1.6rem);
   }
   
   .card:hover .card__description, 

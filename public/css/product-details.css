@@ -1,4 +1,11 @@
 :root {
+  --header-height: 3rem;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+}
+
+:root {
   --first-color: #665f5f57;
   --primary: #665f5f57;
   --second-color: #33303d;
@@ -6,11 +13,24 @@
   --white-color: #fff;
 }
 
+@media screen and (min-width: 968px) {
+  :root {
+    --biggest-font-size: 3.25rem;
+    --big-font-size: 2.25rem;
+    --normal-font-size: 1rem;
+    --smaller-font-size: 0.813rem;
+  }
+}
+
 :root {
   --biggest-font-size: 1.5rem;
   --big-font-size: 1.5rem;
   --normal-font-size: 0.938rem;
   --smaller-font-size: 0.75rem;
+}
+
+body {
+  margin: var(--header-height) 0 0 0;
 }
 
 h1,
@@ -25,7 +45,7 @@ p {
   display: grid;
   grid-template-rows: 1fr 1.5fr;
   grid-template-areas: "sneaker";
-  overflow-x: hidden;
+  overflow: hidden;
   margin-top: 2rem;
 }
 
@@ -214,13 +234,14 @@ p {
     align-content: center;
     justify-content: center;
     column-gap: 6rem;
+    margin-top: 3rem;
   }
   .sneaker__figure {
-    width: 500px;
-    height: 500px;
+    width: 430px;
+    height: 430px;
   }
   .sneaker__img {
-    width: 650px;
+    width: 550px;
     top: 13%;
     left: 3%;
   }
@@ -230,6 +251,10 @@ p {
   }
   .sneaker__colors span {
     display: inline-block;
+  }
+
+  .actions{
+    margin-bottom: 3rem;
   }
 
   .info {
@@ -249,15 +274,9 @@ p {
     margin-bottom: 2.5rem;
   }
   .size__tallas {
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    font-size: 15px;
-  }
-
-  .cant__content {
-    width: 150px;
-    height: 45px;
+    width: 34px;
+    height: 34px;
+    line-height: 35px;
   }
 
   .preci {
@@ -266,6 +285,7 @@ p {
     justify-content: space-between;
     box-shadow: none;
   }
+
   .preci__title {
     color: var(--black-color);
     font-weight: 500;
