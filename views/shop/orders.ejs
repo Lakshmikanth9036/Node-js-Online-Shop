@@ -14,18 +14,39 @@
                     </div>
                </div>
             <% } else { %>
-                <ul class="orders">
+                <div class="orders">
                     <% orders.forEach(order => { %>
-                        <li class="orders__item">
-                            <h1>Order - # <%= order._id %> - <a href="/orders/<%= order._id %>">Invoice</a></h1>
-                            <ul class="orders__products">
+                        <div class="order__item">
+                            <div class="order__id">Order - # <%= order._id %></div>
+                            <div class="divider"></div>
+                            <div class="order__products">
                                 <% order.products.forEach(p => { %>
-                                    <li class="orders__products-item"><%= p.product.title %> (<%= p.quantity %>)</li>
+                                    <div class="product">
+                                        <div class="prod__img">
+                                            <img src="/<%= p.product.imageUrl %>" alt="<%= p.product.title %>">
+                                        </div>
+                                        <div class="prod__details">
+                                            <div class="prod__detail">
+                                                <div>
+                                                    <div class="prod__title"><%= p.product.title %></div>
+                                                    <div class="prod__type">NIKE Men's Running Shoe</div>
+                                                    <div class="prod__size">Size: 8</div>
+                                                    <div class="prod__qty">Quantity: <%= p.quantity %></div>
+                                                </div>
+                                                <div class="prod__price">&#8377;<%= p.product.price %></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <li class="orders__products-item"><%= p.product.title %> (<%= p.quantity %>)</li> -->
                                 <% }); %>
-                            </ul>
-                        </li>
+                            </div>
+
+                            <div class="invoice">
+                                <a class="invoice__btn" href="/orders/<%= order._id %>">Invoice</a>
+                            </div>
+                        </div>
                     <% }); %>
-                </ul>
+                    </div>
             <% } %>
         </main>
         <%- include('../includes/end.ejs') %>

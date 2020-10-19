@@ -8,8 +8,8 @@ const User = require("../models/user");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "",
-    pass: "",
+    user: process.env.NM_MAIL,
+    pass: process.env.NM_PASSWORD,
   },
 });
 
@@ -142,6 +142,7 @@ exports.postSignup = (req, res, next) => {
     .then((hashedPassword) => {
       const user = new User({
         email: email,
+        role: 'USER',
         password: hashedPassword,
         cart: { items: [] },
       });
@@ -152,7 +153,6 @@ exports.postSignup = (req, res, next) => {
       return transporter
         .sendMail({
           to: email,
-          from: "",
           subject: "Signup succeeded",
           html: "<h1>You successfully signed up!</h1>",
         })

@@ -1,27 +1,33 @@
 const fs = require("fs");
 const path = require("path");
 
+const stripe = require("stripe")(
+  process.env.STRIPE_KEY
+  // 'sk_test_51HctgmHbXMq71oh3rPuhP9VCSIAnHOyEAEaTVBTJgC6QZh5nUAlyXvO8fJOwBm8AWHAL2JN6xcUAlcGDw3syNk8b007Q75F3Zj'
+);
+
 const PDFDocument = require("pdfkit");
 
 const Product = require("../models/product");
 const Order = require("../models/order");
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 12;
 
 exports.getProducts = (req, res, next) => {
-
   let page = +req.query.page;
   let totalItems;
-  if(!page){
+  if (!page) {
     page = 1;
   }
 
-  Product.find().countDocuments().then(numProducts => {
-    totalItems = numProducts;
-    return Product.find()
-    .skip((page - 1) * ITEMS_PER_PAGE)
-    .limit(ITEMS_PER_PAGE)
-  })
+  Product.find()
+    .countDocuments()
+    .then((numProducts) => {
+      totalItems = numProducts;
+      return Product.find()
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
+    })
     .then((products) => {
       res.render("shop/product-list", {
         prods: products,
@@ -32,7 +38,7 @@ exports.getProducts = (req, res, next) => {
         hasPreviousPage: page > 1,
         nextPage: page + 1,
         previousPage: page - 1,
-        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE) 
+        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
       });
     })
     .catch((err) => {
@@ -62,16 +68,19 @@ exports.getProduct = (req, res, next) => {
 exports.getIndex = (req, res, next) => {
   let page = +req.query.page;
   let totalItems;
-  if(!page){
+  if (!page) {
     page = 1;
   }
 
-  Product.find().countDocuments().then(numProducts => {
-    totalItems = numProducts;
-    return Product.find()
-    .skip((page - 1) * ITEMS_PER_PAGE)
-    .limit(ITEMS_PER_PAGE)
-  }).then((products) => {
+  Product.find()
+    .countDocuments()
+    .then((numProducts) => {
+      totalItems = numProducts;
+      return Product.find()
+        .skip((page - 1) * ITEMS_PER_PAGE)
+        .limit(ITEMS_PER_PAGE);
+    })
+    .then((products) => {
       res.render("shop/index", {
         prods: products,
         pageTitle: "Shop",
@@ -81,7 +90,7 @@ exports.getIndex = (req, res, next) => {
         hasPreviousPage: page > 1,
         nextPage: page + 1,
         previousPage: page - 1,
-        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE) 
+        lastPage: Math.ceil(totalItems / ITEMS_PER_PAGE),
       });
     })
     .catch((err) => {
@@ -97,10 +106,15 @@ exports.getCart = (req, res, next) => {
     .execPopulate()
     .then((users) => {
       const products = users.cart.items;
+      let total = 0;
+      products.forEach((p) => {
+        total += p.productId.price;
+      });
       res.render("shop/cart", {
         path: "/cart",
         pageTitle: "Your Cart",
         products: products,
+        total: total
       });
     })
     .catch((err) => {
@@ -113,8 +127,8 @@ exports.getCart = (req, res, next) => {
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
 
-  if(!req.session.isLoggedIn){
-    return res.redirect('/login');
+  if (!req.session.isLoggedIn) {
+    return res.redirect("/login");
   }
 
   Product.findById(prodId)
@@ -132,6 +146,83 @@ exports.postCartDeleteProduct = (req, res, next) => {
     .removeFromCart(prodId)
     .then((result) => {
       res.redirect("/cart");
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+exports.getCeckout = (req, res, next) => {
+  let products;
+  let total = 0;
+  req.user
+    .populate("cart.items.productId")
+    .execPopulate()
+    .then((users) => {
+      products = users.cart.items;
+      total = 0;
+      products.forEach((p) => {
+        total += p.productId.price;
+      });
+      return stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: products.map((p) => {
+          return {
+            name: p.productId.title,
+            description: p.productId.description,
+            amount: p.productId.price * 100,
+            currency: "inr",
+            quantity: p.quantity,
+          };
+        }),
+        success_url:
+          req.protocol + "://" + req.get("host") + "/checkout/success",
+        cancel_url: req.protocol + "://" + req.get("host") + "/checkout/cancel",
+      });
+    })
+    .then((session) => {
+      res.render("shop/checkout", {
+        path: "/checkout",
+        pageTitle: "Checkout",
+        products: products,
+        totalSum: total,
+        sessionId: session.id,
+      });
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+
+exports.getCheckoutSuccess = (req, res, next) => {
+  req.user
+    .populate("cart.items.productId")
+    .execPopulate()
+    .then((users) => {
+      const products = users.cart.items.map((i) => {
+        return {
+          quantity: i.quantity,
+          product: { ...i.productId._doc },
+        };
+      });
+      const order = new Order({
+        user: {
+          email: req.user.email,
+          userId: req.user,
+        },
+        products: products,
+      });
+      order.save();
+    })
+    .then((result) => {
+      return req.user.clearCart();
+    })
+    .then(() => {
+      res.redirect("/orders");
     })
     .catch((err) => {
       const error = new Error(err);
@@ -220,16 +311,18 @@ exports.getInvoice = (req, res, next) => {
       let totalPrice = 0;
       order.products.forEach((prod) => {
         totalPrice += prod.quantity * prod.product.price;
-        pdfDoc.fontSize(14).text(
-          prod.product.title +
-            " - " +
-            prod.quantity +
-            " x " +
-            "Rs" +
-            prod.product.price
-        );
+        pdfDoc
+          .fontSize(14)
+          .text(
+            prod.product.title +
+              " - " +
+              prod.quantity +
+              " x " +
+              "Rs" +
+              prod.product.price
+          );
       });
-      pdfDoc.text('Total Price: Rs '+totalPrice);
+      pdfDoc.text("Total Price: Rs " + totalPrice);
       pdfDoc.end();
 
       // fs.readFile(invoicePath, (err, data) => {

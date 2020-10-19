@@ -41,6 +41,7 @@
             >Orders</a
           >
         </li>
+        <% if (isAdmin) { %>
         <li class="nav__item">
           <a
             class="nav__link <%= path === '/admin/add-product' ? 'active' : '' %>"
@@ -55,6 +56,7 @@
             >Admin Products
           </a>
         </li>
+        <% } %>
         <% } %>
 
         <% if (!isAuthenticated) { %>
@@ -111,7 +113,9 @@
       </ul>
     </div>
     <div class="nav__shop mobile">
-      <img src="../../images/logo/shop-bag.svg" alt="" />
+      <a href="/cart">
+        <img src="../../images/logo/shop-bag.svg" alt="" />
+      </a>
     </div>
   </nav>
 </header>

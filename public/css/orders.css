@@ -3,9 +3,9 @@
   padding: 0;
 }
 
-body{
+/* body{
   background-color: #eeeeee;
-}
+} */
 
 main {
   padding: 3rem 0; 
@@ -59,31 +59,128 @@ main {
 
 
 .orders {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  max-width: 1260px;
+  background-color: #fff;
+  margin: 0 auto;
 }
 
-.orders__item h1 {
-    margin: 0;
-    font-size: 1rem;
+.order__item {
+  width: 98%;
+  position: relative;
+  margin: 0 auto;
+  padding: 8px 8px 0 8px;
+  box-shadow: 0 0 10px rgb(0, 0, 0, 0.50);
+  margin-bottom: 2rem;
 }
 
-.orders__item {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
-  margin-bottom: 1rem;
+.order__id {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0 8px;
 }
 
-.orders__products {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.product {
+  box-shadow: rgb(229, 229, 229) 0px 0px 0px 0px inset,
+    rgb(229, 229, 229) 0px 0px 0px 0px inset,
+    rgb(229, 229, 229) 0px -1px 0px 0px inset,
+    rgb(229, 229, 229) 0px 0px 0px 0px inset;
+  padding: 24px 0;
+  display: flex;
+  width: 100%;
 }
 
-.orders__products-item {
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    border: 1px solid #00695c;
-    color: #00695c;
+.prod__details {
+  width: 100%;
+}
+
+.prod__detail {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  min-height: 1px;
+  font-size: 16px;
+  line-height: 1.75;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.prod__title {
+  font-weight: 500;
+}
+
+.prod__price {
+  font-weight: 500;
+}
+
+.prod__img {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prod__img img {
+  width: 100%;
+  transform: rotate(30deg);
+}
+
+.divider {
+  height: 1px;
+  margin: 8px 0;
+  width: 100%;
+  background-color: #e0e0e0;
+}
+
+.invoice{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem .25rem;
+}
+
+.invoice__btn{
+  display: inline-block;
+  font: inherit;
+  font-size: 18px;
+  border: 1px solid #111111;
+  color: #111111;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 0.25rem 1rem;
+  text-decoration: none;
+}
+
+.invoice__btn:hover{
+  color: white;
+  background: #111111;
+}
+
+@media screen and (min-width: 1024px){
+  .order__id {
+    font-size: 28px;
+    padding: 0.75rem ;
+  }
+
+  .product{
+    padding-left: 1rem;
+  }
+
+  .prod__detail {
+    font-size: 20px;
+    padding: 0 2rem  0 1rem;
+  }
+
+  .prod__img {
+    width: 200px;
+  }
+
+  .invoice{
+    padding: 1rem;
+  }
+
+  .invoice__btn{
+    font-size: 20px;
+    padding: 0.75rem 2rem;
+  }
 }

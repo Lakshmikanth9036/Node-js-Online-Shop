@@ -6,26 +6,67 @@
         <%- include('../includes/navigation.ejs') %>
         <main>
             <% if (products.length > 0) { %>
-                <ul class="cart__item-list">
-                    <% products.forEach(p => { %>
-                        <li class="cart__item">
-                            <h1><%= p.productId.title %></h1>
-                            <h2>Quantity: <%= p.quantity %></h2>
-                            <form action="/cart-delete-item" method="POST">
-                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                <input type="hidden" value="<%= p.productId._id %>" name="productId">
-                                <button class="btn danger" type="submit">Delete</button>
-                            </form>
-                        </li>
-                    <% }) %>
-                </ul>
-                <hr>
-                <div class="centered">
-                    <form action="/create-order" method="POST">
-                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                        <button type="submit" class="btn">Order Now!</button>
-                    </form>
+                <div class="main__cart">
+                    <div class="cart">
+                        <div class="cart-title">My Cart (<%= products.length %>)</div> 
+                            <% products.forEach(p => { %>
+                                <div class="cart__body">
+                                    <div class="prod__img">
+                                        <img src="/<%= p.productId.imageUrl %>" alt="<%= p.productId.title %>">
+                                    </div>
+                                    <div class="prod__details">
+                                        <div class="prod__detail">
+                                            <div>
+                                                <div class="prod__title"><%= p.productId.title %></div>
+                                                <div class="prod__type">NIKE Men's Running Shoe</div>
+                                                <div class="prod__size">Size: 8</div>
+                                                <div class="prod__qty">Quantity: <%= p.quantity %></div>
+                                            </div>
+                                            <div class="prod__price">&#8377;<%= p.productId.price %></div>
+                                        </div>
+                                          
+                                        <form action="/cart-delete-item" method="POST">
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                            <input type="hidden" value="<%= p.productId._id %>" name="productId">
+                                            <button class="rm__item__btn" type="submit">Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- <li class="cart__item">
+                                    <h1><%= p.productId.title %></h1>
+                                    <h2>Quantity: <%= p.quantity %></h2>
+                                    <form action="/cart-delete-item" method="POST">
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="hidden" value="<%= p.productId._id %>" name="productId">
+                                        <button class="btn danger" type="submit">Delete</button>
+                                    </form>
+                                </li> -->
+                            <% }) %>
+                    </div>
+                    <div class="cart__summary">
+                        <div class="summary__title">Summary</div>
+                        <div class="sub">
+                            <div class="subtotal__text">Subtotal</div>
+                            <div class="subtotal__price">&#8377; <%= total %></div>
+                        </div>
+                        <div class="delivary">
+                            <div class="delivary__text">Estimated Delivery & Handling</div>
+                            <div class="delivary__price">&#8377;0</div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="total">
+                            <div class="total">Total</div>
+                            <div class="total__price">&#8377; <%= total %></div>
+                        </div>
+                        <div class="checkout">
+                            <a href="/checkout" class="checkout__btn">Place Order</a>
+                        </div>
+                    </div>
                 </div>
+                <!-- <hr> -->
+                <!-- <div class="centered">
+                    <a href="/checkout" class="btn">Place Order</a>
+                </div> -->
             <% } else { %>
                <div class="main-empty__cart">
                     <div class="empty__cart">

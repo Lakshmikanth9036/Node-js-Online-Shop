@@ -30,7 +30,6 @@ function changeSize(){
 
 function changeColor(){
     let primary = this.getAttribute('primary');
-    console.log(primary)
     let color = this.getAttribute('color');
     let sneakerColor = document.querySelector(`.sneaker__img[color="${color}"]`);
 
